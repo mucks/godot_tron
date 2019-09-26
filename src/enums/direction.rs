@@ -1,6 +1,6 @@
 use super::MoveEvent;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum Direction {
     Forward,  //z--
     Backward, //z++
@@ -15,7 +15,7 @@ impl Default for Direction {
 }
 
 impl Direction {
-    pub fn apply_move_event(&mut self, move_event: MoveEvent) {
+    pub fn apply_move_event(&mut self, move_event: &MoveEvent) {
         use Direction::*;
         use MoveEvent::*;
 

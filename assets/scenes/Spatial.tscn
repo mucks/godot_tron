@@ -1,20 +1,97 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://gdnative/player.gdns" type="Script" id=1]
 [ext_resource path="res://assets/mesh/player.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/fonts/DroidSansMono.tres" type="DynamicFont" id=3]
+[ext_resource path="res://gd_scripts/FPSCount.gd" type="Script" id=4]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 1, 0.6 )
+
+[sub_resource type="BoxShape" id=2]
+
+[sub_resource type="PlaneMesh" id=3]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.00392157, 0.0117647, 0.121569, 1 )
+
+[sub_resource type="ImageTexture" id=5]
 
 [node name="Spatial" type="Spatial"]
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.832461, 0.554084, 0, -0.554084, 0.832461, 0, 3.19046, 4.69527 )
-
-[node name="Player" type="Spatial" parent="."]
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 0.1, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0 )
 script = ExtResource( 1 )
+trail_offset = -0.025
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 1.00788, 0, 0, 0, 1.00788, 0, 0, 0, 1.63707, 0, 0, -2.38414 )
+shape = SubResource( 1 )
 
 [node name="PlayerMesh" type="MeshInstance" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.57856 )
 mesh = ExtResource( 2 )
 material/0 = null
 material/1 = null
 material/2 = null
 material/3 = null
+
+[node name="Camera" type="Camera" parent="Player"]
+transform = Transform( 10, 0, 0, 0, 4.1623, 2.77042, 0, -2.77042, 4.1623, 0, 15.9523, 23.4764 )
+
+[node name="Floor" type="StaticBody" parent="."]
+editor/display_folded = true
+transform = Transform( 100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 2 )
+
+[node name="FloorMesh" type="MeshInstance" parent="Floor/CollisionShape"]
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_right = 120.0
+margin_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 120.0
+margin_bottom = 50.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 120.0
+margin_bottom = 50.0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 120.0
+margin_bottom = 50.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+editor/display_folded = true
+margin_right = 120.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 120, 50 )
+texture = SubResource( 5 )
+
+[node name="FPSLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer/NinePatchRect"]
+margin_right = 54.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 100, 50 )
+custom_fonts/font = ExtResource( 3 )
+text = "FPS"
+valign = 1
+
+[node name="FPSCount" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer/NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 3 )
+text = "0"
+align = 2
+valign = 1
+script = ExtResource( 4 )
+
+[node name="TrailStorage" type="Node" parent="."]
