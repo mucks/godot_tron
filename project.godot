@@ -16,8 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="godot_tron"
-run/main_scene="res://assets/scenes/Spatial.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+globals="*res://gd_scripts/globals.gd"
 
 [input]
 
