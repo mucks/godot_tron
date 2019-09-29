@@ -1,3 +1,4 @@
 extends Node
 
-var otherPlayerId = -1
+var my_info = { }
+var player_info = {}

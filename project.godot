@@ -16,12 +16,16 @@ _global_script_class_icons={
 [application]
 
 config/name="godot_tron"
-run/main_scene="res://scenes/Menu.tscn"
+run/main_scene="res://scenes/Lobby.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 globals="*res://gd_scripts/globals.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray(  )
 
 [input]
 

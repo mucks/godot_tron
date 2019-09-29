@@ -1,24 +1,22 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://gd_scripts/Server.gd" type="Script" id=1]
+[ext_resource path="res://gd_scripts/Lobby.gd" type="Script" id=1]
 
-[node name="Server" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Lobby" type="Node"]
 script = ExtResource( 1 )
 
 [node name="HostButton" type="Button" parent="."]
-margin_left = 446.0
-margin_top = 254.0
-margin_right = 620.0
-margin_bottom = 319.0
+margin_left = 802.776
+margin_top = 23.6544
+margin_right = 981.776
+margin_bottom = 80.6544
 text = "Host Game"
 
 [node name="JoinButton" type="Button" parent="."]
-margin_left = 443.0
-margin_top = 349.0
-margin_right = 622.0
-margin_bottom = 409.0
+margin_left = 799.244
+margin_top = 122.731
+margin_right = 976.244
+margin_bottom = 176.731
 text = "Join Game"
 [connection signal="pressed" from="HostButton" to="." method="_on_HostButton_pressed"]
 [connection signal="pressed" from="JoinButton" to="." method="_on_JoinButton_pressed"]
